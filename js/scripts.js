@@ -1,8 +1,3 @@
-/*!
-* Start Bootstrap - Stylish Portfolio v6.0.3 (https://startbootstrap.com/theme/stylish-portfolio)
-* Copyright 2013-2021 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-stylish-portfolio/blob/master/LICENSE)
-*/
 window.addEventListener('DOMContentLoaded', event => {
 
     const sidebarWrapper = document.getElementById('sidebar-wrapper');
@@ -14,7 +9,7 @@ window.addEventListener('DOMContentLoaded', event => {
         sidebarWrapper.classList.toggle('active');
         _toggleMenuIcon();
         menuToggle.classList.toggle('active');
-    })
+    });
 
     // Closes responsive menu when a scroll trigger link is clicked
     var scrollTriggerList = [].slice.call(document.querySelectorAll('#sidebar-wrapper .js-scroll-trigger'));
@@ -23,7 +18,7 @@ window.addEventListener('DOMContentLoaded', event => {
             sidebarWrapper.classList.remove('active');
             menuToggle.classList.remove('active');
             _toggleMenuIcon();
-        })
+        });
     });
 
     function _toggleMenuIcon() {
@@ -53,8 +48,8 @@ window.addEventListener('DOMContentLoaded', event => {
                 scrollToTopVisible = false;
             }
         }
-    })
-})
+    });
+});
 
 function fadeOut(el) {
     el.style.opacity = 1;
@@ -65,7 +60,7 @@ function fadeOut(el) {
             requestAnimationFrame(fade);
         }
     })();
-};
+}
 
 function fadeIn(el, display) {
     el.style.opacity = 0;
@@ -77,4 +72,4 @@ function fadeIn(el, display) {
             requestAnimationFrame(fade);
         }
     })();
-};
+}
