@@ -63,6 +63,7 @@ ul li:nth-child(3) {
 
 .inner .linkme {
   position: absolute;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 30px;
   margin: -5px 0 0 20px;
   color: white;
