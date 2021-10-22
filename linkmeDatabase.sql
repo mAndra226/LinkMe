@@ -12,12 +12,11 @@ USE linkme_database;
 DROP TABLE IF EXISTS UserProfile;
 CREATE TABLE UserProfile (
 	Userid				int(11)	 		AUTO_INCREMENT	NOT NULL,
-    Username			VARCHAR(300) 	NOT NULL,
-    FirstName			VARCHAR(300) 	NOT NULL,
-    LastName			VARCHAR(300) 	NOT NULL,
-	useremail			VARCHAR(300) 	NOT NULL,
-    userpassword		VARCHAR(300) 	NOT NULL,
-    profilepic			longblob		NOT NULL,
+    realname			VARCHAR(300) 	NOT NULL,
+	email				VARCHAR(300) 	NOT NULL,
+    pass				VARCHAR(300) 	NOT NULL,
+    username			VARCHAR(300) 	NOT NULL,
+    profilepic			longblob		,
     PRIMARY KEY (Userid)
    
 );
