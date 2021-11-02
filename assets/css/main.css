@@ -71,6 +71,20 @@ input, select, textarea {
 	appearance: none;
 }
 
+#color {
+	
+}
+
+.wrapper {
+	width: 100%;
+	margin-left: 20em;
+}
+
+img {
+	border-radius: 50%;
+}
+
+
 /* Basic */
 
 	@-ms-viewport {
