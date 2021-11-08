@@ -73,19 +73,20 @@ input, select, textarea {
 	appearance: none;
 }
 
-#color {
-	
+.wrapper {
+	width: auto;
+	margin-left: 20em;
 }
 
-.wrapper {
-	width: 100%;
-	margin-left: 20em;
+.inner {
+	margin-left: 10px;
+	/* background-color: white;
+	color: black; */
 }
 
 img {
 	border-radius: 50%;
 }
-
 
 /* Basic */
 
@@ -2696,6 +2697,12 @@ img {
 		ul.actions li {
 			padding: 0 0 0 1em;
 			vertical-align: middle;
+			
+			top: 20px;
+		}
+
+		ul.actions li a {
+			top: 10px;
 		}
 
 		ul.actions.special {
@@ -3481,13 +3488,13 @@ img {
 /* Wrapper (main) */
 
 	#sidebar + #wrapper {
-		margin-left: 0;
+		margin-left: auto;
 	}
 
 		@media screen and (max-width: 1280px) {
 
 			#sidebar + #wrapper {
-				margin-left: 0;
+				/* margin-left: 0; */
 				padding-top: 3.5em;
 			}
 
@@ -3881,7 +3888,7 @@ img {
 		@media screen and (max-width: 736px) {
 
 			#sidebar {
-				display: none;
+				display: hidden;
 			}
 
 		}

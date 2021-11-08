@@ -196,6 +196,10 @@ button:hover {
     img {
         height: 180px;
         width: 180px;
-        left: 58px;
+        left: 85px;
+    }
+
+    .socialContainer {
+        margin-left: -10px;
     }
 }
