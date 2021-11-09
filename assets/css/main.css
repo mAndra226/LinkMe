@@ -80,8 +80,7 @@ input, select, textarea {
 
 .inner {
 	margin-left: 10px;
-	/* background-color: white;
-	color: black; */
+	margin-top: -100px;
 }
 
 img {
