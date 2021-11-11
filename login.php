@@ -24,11 +24,11 @@
 				header('Location: result.html');
 			}else{
 				echo "<h2>Invalid email or password</h2>";
-				header('Location: login.html');
+				header('Location: login.html?error=incorrectpw');
 			}
 		}else{
 			echo "<h2>Invalid email or password</h2>";
-			header('Location: login.html');
+			header('Location: login.html?error=incorrectemail');
 		}
 		$stmt->close();
 		$conn->close();
