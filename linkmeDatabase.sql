@@ -16,7 +16,6 @@ CREATE TABLE UserProfile (
 	email				VARCHAR(300) 	NOT NULL,
     pass				VARCHAR(300) 	NOT NULL,
     username			VARCHAR(300) 	NOT NULL,
-    profilepic			longblob		,
     PRIMARY KEY (Userid)
    
 );
@@ -70,6 +69,42 @@ CREATE TABLE Github (
     PRIMARY KEY (githublink),
     FOREIGN KEY (Userid) REFERENCES UserProfile(Userid)
     );
+-- Creating the Youtube Table:
+DROP TABLE IF EXISTS Youtube;
+CREATE TABLE Youtube (
+	ytlink				VARCHAR(300)		NOT NULL,
+    Userid				int(11)	 			NOT NULL,
+	clickcount			int(11)				NOT NULL,
+    PRIMARY KEY (ytlink),
+    FOREIGN KEY (Userid) REFERENCES UserProfile(Userid)
+    );
+-- Creating the Snapchat Table:
+DROP TABLE IF EXISTS Snapchat;
+CREATE TABLE Snapchat (
+	sclink			VARCHAR(300)		NOT NULL,
+    Userid				int(11)	 			NOT NULL,
+	clickcount			int(11)				NOT NULL,
+    PRIMARY KEY (sclink),
+    FOREIGN KEY (Userid) REFERENCES UserProfile(Userid)
+    );
+-- Creating the Reddit Table:
+DROP TABLE IF EXISTS Reddit;
+CREATE TABLE Reddit (
+	redditlink			VARCHAR(300)		NOT NULL,
+    Userid				int(11)	 			NOT NULL,
+	clickcount			int(11)				NOT NULL,
+    PRIMARY KEY (redditlink),
+    FOREIGN KEY (Userid) REFERENCES UserProfile(Userid)
+    );
+-- Creating the Pintrest Table:
+DROP TABLE IF EXISTS Pintrest;
+CREATE TABLE Pintrest (
+	pintlink			VARCHAR(300)		NOT NULL,
+    Userid				int(11)	 			NOT NULL,
+	clickcount			int(11)				NOT NULL,
+    PRIMARY KEY (pintlink),
+    FOREIGN KEY (Userid) REFERENCES UserProfile(Userid)
+    );
     
 -- Creating the Links Table:
 DROP TABLE IF EXISTS Links;
@@ -80,25 +115,18 @@ CREATE TABLE Links (
 	Instagram			VARCHAR(300),
     Linkedin			VARCHAR(300),
     Github				VARCHAR(300),
+    Youtube				VARCHAR(300),
+    Snapchat			VARCHAR(300),
+    Reddit				VARCHAR(300),
+    Pintrest			VARCHAR(300),
     FOREIGN KEY (Userid) REFERENCES UserProfile(Userid),
     FOREIGN KEY (Facebook) REFERENCES Facebook(FBLINK),
     FOREIGN KEY (Twitter) REFERENCES Twitter(twitterlink),
     FOREIGN KEY (Instagram) REFERENCES Instagram(instalink),
     FOREIGN KEY (Linkedin) REFERENCES Linkedin(linkedinlink),
-    FOREIGN KEY (Github) REFERENCES Github(githublink)
+    FOREIGN KEY (Github) REFERENCES Github(githublink),
+    FOREIGN KEY (Youtube) REFERENCES Youtube(ytlink),
+    FOREIGN KEY (Snapchat) REFERENCES Snapchat(sclink),
+    FOREIGN KEY (Reddit) REFERENCES Reddit(redditlink),
+    FOREIGN KEY (Pintrest) REFERENCES Pintrest(pintlink)
     );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
