@@ -3,8 +3,10 @@
 	$email = $_POST['email'];
 	$pass = $_POST['pass'];
 	$hashedpw = password_hash($pass, PASSWORD_DEFAULT);
+	$confirmpass = $_POST['confirmpass'];
+	$hashconpw = password_hash($confirmpass, PASSWORD_DEFAULT);
 	$username = $_POST['username'];
-
+	
 	//Database connection
 	
 	$dbServername = "localhost";
@@ -15,17 +17,39 @@
 	if(mysqli_connect_error()){
 		die('Connection Failed: '.mysqli_connect_error());
 	}else{
-		$dup = mysqli_query($conn, "select * from userprofile where email = '$email' ");
-		$dup2 = mysqli_query($conn, "select * from userprofile where username = '$username' ");
+		//password confirm
+		if($pass !== $confirmpass)
+		{
+			echo "Passwords do not match";
+			header('Location: signup.html?error=passwordsdontmatch');
+			exit();
+		}
 		
-		if(mysqli_num_rows($dup) > 0){
+		//duplicate check
+		$dup =  "SELECT * from userprofile where email = ?;";
+		$stmt = mysqli_stmt_init($conn);
+		mysqli_stmt_prepare($stmt, $dup);
+		mysqli_stmt_bind_param($stmt, "s", $email);
+		mysqli_stmt_execute($stmt);
+		$resultData = mysqli_stmt_get_result($stmt);
+		if(mysqli_fetch_assoc($resultData)){
 			echo "This email is already taken ";
-			header('Location: signup.html');
-		}else if(mysqli_num_rows($dup2) > 0){
+			header('Location: signup.html?error=emailalreadytaken');
+			exit();
+		}
+		$dup2 = "SELECT * from userprofile where username = ?; ";
+		$stmt = mysqli_stmt_init($conn);
+		mysqli_stmt_prepare($stmt, $dup2);
+		mysqli_stmt_bind_param($stmt, "s", $username);
+		mysqli_stmt_execute($stmt);
+		$resultData = mysqli_stmt_get_result($stmt);
+		if(mysqli_fetch_assoc($resultData)){
 			echo "This username is already taken ";
-			header('Location: signup.html');
+			header('Location: signup.html?error=usernamealreadytaken');
+			exit();
 		}else{
 			
+		//Login sucesss insert statements
 		$INSERT = "INSERT INTO userprofile (realname, email, pass, username) 
 			values(?,?,?,?)";
 		$stmt = $conn->prepare($INSERT);
