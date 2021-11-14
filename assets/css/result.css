@@ -75,7 +75,7 @@ img {
     height: 250px;
     width: 250px;
     border-radius: 50%;
-    top: 10vh;
+    top: 6vh;
     left: 36vw;
 
     -webkit-box-shadow: 0px 4px 14px 0px rgba(0,0,0,0.31); 
@@ -86,20 +86,43 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 150px;
+    margin-top: 80px;
+    word-break: break-all;
 }
 
 .usersName p {
-    position: relative;
     font-size: 50px;
-    top: 8rem;
-    left: 10px;
+    margin-top: 10px;
+    margin-right: 100px;
 }
+
+.userPersonalInfo {
+    margin-left: 1000px;
+}
+
+.userPersonalInfo, p {
+    display: inline;
+    margin-top: 150px;
+}
+
+.userPersonalInfo .pNum {
+    font-size: 18px;
+}
+
+/*
+.userPersonalInfo .address {
+    font-size: 18px;
+    margin-top: 0px;
+    margin-left: -150px;
+} */
 
 /* Social Media */
 .socialContainer {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: -100px;
 }
 
 .socialLinks0, .socialLinks1, .socialLinks2, .socialLinks3, .socialLinks4 {
