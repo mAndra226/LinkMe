@@ -20,15 +20,24 @@
 			$data = $stmt_result->fetch_assoc();
 			$pwdcheck = password_verify($pass, $data['pass']);
 			if($pwdcheck == true){
+				//dynamic log in
+				$ID = mysqli_real_escape_string($conn, $email);
+				$sql = "SELECT * FROM userprofile WHERE email = '$ID' ";
+				$result = mysqli_query($conn, $sql) or die("Bad Query: $sql");
+				$row = mysqli_fetch_array($result);
+				$Userid = $row['username'];
 				echo "<h2>Login Successfully</h2>";
-				header('Location: result.html');
+				header("Location: result.html?ID=$Userid");
+				exit();
 			}else{
 				echo "<h2>Invalid email or password</h2>";
 				header('Location: login.html?error=incorrectpw');
+				exit();
 			}
 		}else{
 			echo "<h2>Invalid email or password</h2>";
 			header('Location: login.html?error=incorrectemail');
+			exit();
 		}
 		$stmt->close();
 		$conn->close();
