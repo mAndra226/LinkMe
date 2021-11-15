@@ -1,3 +1,31 @@
+<?php
+	$dbServername = "localhost";
+	$dbUsername = "root";
+	$dbPassword = "";
+	$dbName = "linkme_database";
+	$conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+	if(mysqli_connect_error()){
+		die('Connection Failed: '.mysqli_connect_error());
+	}else{
+		if(isset($_GET["ID"])){
+			$ID = mysqli_real_escape_string($conn, $_GET['ID']);
+			$sql = "SELECT * FROM userprofile WHERE username = '$ID' ";
+			$result = mysqli_query($conn, $sql) or die("Bad Query: $sql");
+			$row = mysqli_fetch_array($result);
+			if(mysqli_num_rows($result) == 0){
+				header('Location: index.html');
+				exit();
+			
+			}
+		} else {
+			header('Location: index.html');
+			exit();
+			}
+			}
+?>
+
+
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -29,11 +57,7 @@
 				<!-- Users profile picture-->
 				<img src="assets/css/images/pic3.jpg" alt="picture">
 				<div class="usersName">
-					<p>Hello World</p>
-				</div>
-				<div class="userPersonalInfo">
-					<p class="pNum">Phone#</p>
-					<p class="address">Address</p>
+					<p><?php echo $row['realname'] ?></p>
 				</div>
 				<!--Social Media Links-->
 				<div class="socialContainer">
