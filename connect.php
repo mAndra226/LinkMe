@@ -57,9 +57,17 @@
 		$stmt->execute();
 		echo "registration successfully...";
 		
+		$ID = mysqli_real_escape_string($conn, $email);
+		$sql = "SELECT * FROM userprofile WHERE email = '$ID' ";
+		$result = mysqli_query($conn, $sql) or die("Bad Query: $sql");
+		$row = mysqli_fetch_array($result);
+		$Userid = $row['username'];
+		
 		$stmt->close();
-		$conn->close();
-		header('Location: result.html');
+		$conn->close();		
+		header("Location: result.html?ID=$Userid");
+		exit();
+		
 		}
 		
 	}
