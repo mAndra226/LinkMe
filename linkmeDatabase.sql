@@ -19,6 +19,7 @@ CREATE TABLE UserProfile (
     country				VARCHAR(300)	,
     phone				VARCHAR(15) 	,
     bio					VARCHAR(500)	,
+    image				VARCHAR(300)	,
     PRIMARY KEY (Userid)
    
 );
