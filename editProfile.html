@@ -53,7 +53,7 @@
 		</header>
 
 		<!-- Wrapper -->
-		<form action="editprofile.php" method="post" >
+		<form action="editprofile.php" method="post" enctype="multipart/form-data">
 			<div id="wrapper">
 				<section id="main" class="wrapper">
 					<h1 class="major" align="center"><font size="8">Edit you Profile</font></h1>
@@ -69,7 +69,7 @@
 							};
 						</script>
 						<label for="profilepic">Add your profile picture</label>
-						<input type="file" accept="image/*" onchange="loadFile(event)">
+						<input type="file" name="file" accept="image/*" onchange="loadFile(event)">
 					</div>
 				</section>
 
@@ -93,19 +93,10 @@
 										<option value="white">white</option>
 									</select> -->
 									<!-- <input type="color" style="height: 2.75em" name="phone" id="phone" value="#A0A0A0" placeholder="Phone number"> -->
-									<input type="text" name="address" id="address" value="" placeholder= "<?php 
-									if(($row['country'] == NULL)){
-										 echo 'City, State, Country';
-								
-									}else{
-										echo $row['country'] ;
-										
-										}
-									?> "
-									>
+									<input type="text" name="address" id="address" value="" placeholder="<?php echo (($row['country'] == '') ? 'City, State, Country' : $row['country']); ?>">
 								</div>
 								<div class="col-6 col-12-xsmall">
-									<input type="tel" style="height: 2.75em" name="phone" id="phone" value="" placeholder= "<?php echo (($row['phone'] == '') ? 'Phone Number' : 'Other'); ?>" >
+									<input type="tel" style="height: 2.75em" name="phone" id="phone" value="" placeholder= "<?php echo (($row['phone'] == '') ? 'Phone Number' : $row['phone']); ?>" >
 								</div>
 							</div>
 						<!-- <h1  align="center">
@@ -170,11 +161,11 @@
 						<!-- <form method="post" action="#"> -->
 							<div class="row gtr-uniform">
 								<div class="col-12">
-									<textarea name="bio" id="bio" placeholder="<?php echo (($row['bio'] == '') ? 'Add something about you here...' : 'Other'); ?>" rows="6"></textarea>
+									<textarea name="bio" id="bio" placeholder="<?php echo (($row['bio'] == '') ? 'Add something about you here...' : $row['bio']); ?>" rows="6"></textarea>
 								</div>
 								<div class="col-12">
 									<!-- <ul class="actions"> -->
-										<button type="submit" value="Save" class="primary"><a href="result.html?ID=$ID">Save</a></button>
+										<button type="submit" value="Save" class="primary"><a >Save</a></button>
 										<button type="reset" value="Reset">Reset</button>
 									<!-- </ul> -->
 								</div>
