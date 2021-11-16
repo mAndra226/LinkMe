@@ -13,6 +13,9 @@
 			$sql = "SELECT * FROM userprofile WHERE username = '$ID' ";
 			$result = mysqli_query($conn, $sql) or die("Bad Query: $sql");
 			$row = mysqli_fetch_array($result);
+			//$image = $row['image'];
+			//$imagesql = "SELECT image FROM userprofile WHERE username = '$ID' ";
+			//$fileDestination = mysqli_query($conn, $imagesql) or die("Bad Query: $imagesql");
 			if(mysqli_num_rows($result) == 0){
 				header('Location: index.html');
 				exit();
@@ -75,7 +78,9 @@
 		<div id="wrapper">
 			<div class="containerBkg">
 				<!-- Users profile picture-->
-				<img src="assets/css/images/pic3.jpg" alt="picture">
+				<?php 
+				$image = strval($row['image']);
+				echo "<img src = '$image' >";?>
 				<div class="usersName">
 					<p><?php echo $row['realname'] ?></p>
 				</div>
@@ -90,7 +95,7 @@
 				<!--Bio-->
 				<div class="bioBackround">
 					<p>
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+						<?php echo $row['bio'] ?>
 					</p>
 				</div>
 
