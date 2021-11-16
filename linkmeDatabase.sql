@@ -16,6 +16,9 @@ CREATE TABLE UserProfile (
 	email				VARCHAR(300) 	NOT NULL,
     pass				VARCHAR(300) 	NOT NULL,
     username			VARCHAR(300) 	NOT NULL,
+    country				VARCHAR(300)	,
+    phone				VARCHAR(15) 	,
+    bio					VARCHAR(500)	,
     PRIMARY KEY (Userid)
    
 );
@@ -96,9 +99,9 @@ CREATE TABLE Reddit (
     PRIMARY KEY (redditlink),
     FOREIGN KEY (Userid) REFERENCES UserProfile(Userid)
     );
--- Creating the Pintrest Table:
-DROP TABLE IF EXISTS Pintrest;
-CREATE TABLE Pintrest (
+-- Creating the Pinterest Table:
+DROP TABLE IF EXISTS Pinterest;
+CREATE TABLE Pinterest (
 	pintlink			VARCHAR(300)		NOT NULL,
     Userid				int(11)	 			NOT NULL,
 	clickcount			int(11)				NOT NULL,
@@ -118,7 +121,7 @@ CREATE TABLE Links (
     Youtube				VARCHAR(300),
     Snapchat			VARCHAR(300),
     Reddit				VARCHAR(300),
-    Pintrest			VARCHAR(300),
+    Pinterest			VARCHAR(300),
     FOREIGN KEY (Userid) REFERENCES UserProfile(Userid),
     FOREIGN KEY (Facebook) REFERENCES Facebook(FBLINK),
     FOREIGN KEY (Twitter) REFERENCES Twitter(twitterlink),
@@ -128,5 +131,5 @@ CREATE TABLE Links (
     FOREIGN KEY (Youtube) REFERENCES Youtube(ytlink),
     FOREIGN KEY (Snapchat) REFERENCES Snapchat(sclink),
     FOREIGN KEY (Reddit) REFERENCES Reddit(redditlink),
-    FOREIGN KEY (Pintrest) REFERENCES Pintrest(pintlink)
+    FOREIGN KEY (Pinterest) REFERENCES Pinterest(pintlink)
     );
