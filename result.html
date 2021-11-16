@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	$dbServername = "localhost";
 	$dbUsername = "root";
 	$dbPassword = "";
@@ -43,9 +44,28 @@
 				<a href="index.html" class="linkme">LinkMe</a>
 				<nav>
 					<ul>
-						<li><a href="editProfile.html">Edit</a></li>
+						<?php
+						if (isset($_SESSION["uid"])){
+							if($_SESSION["uid"] == $ID){
+								$Userid = $row['username'];
+								echo "<li><a href='editprofile.html?ID=$Userid'>Edit</a></li>";
+							}
+						}
+						?>
 						<li><a href="#one">About</a></li>
-						<li><a href="index.html">Sign Off</a></li>
+						<?php
+						if (isset($_SESSION["uid"])){
+							if($_SESSION["uid"] == $ID){
+								$Userid = $row['username'];
+								echo "<li><a href='logout.php'>Log Out</a></li>";
+							}
+						}
+						?>
+						<?php
+						if (!(isset($_SESSION["uid"]))){
+								echo "<li><a href='login.html'>Login</a></li>";						
+						}
+						?>
 					</ul>
 				</nav>
 			</div>
