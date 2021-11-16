@@ -56,18 +56,25 @@
 		<form action="editprofile.php" method="post" >
 			<div id="wrapper">
 				<section id="main" class="wrapper">
-					<div class="inner">
-						<h1 class="major" align="center"><font size="8">Edit you Profile</font></h1>
-						<div style="width:320px; margin:0 auto;">
-							<img style="width:300px" src="/assets/images/signup.JPG">
-							<label for="profilepic">Add your profile picture</label>
-							<input class="upload" type="file" id="profilepic" onchange="setFiles(this)">
-						</div>
+					<h1 class="major" align="center"><font size="8">Edit you Profile</font></h1>
+					<div style="width:320px; margin:0 auto;">
+						<img style="width:300px; height: 300px" id="profilepic" src="/assets/images/signup.JPG"/>
+						<script>
+							var loadFile = function(event) {
+								var profilepic = document.getElementById('profilepic');
+								profilepic.src = URL.createObjectURL(event.target.files[0]);
+								profilepic.onload = function() {
+									URL.revokeObjectURL(profilepic.src)
+								}
+							};
+						</script>
+						<label for="profilepic">Add your profile picture</label>
+						<input type="file" accept="image/*" onchange="loadFile(event)">
 					</div>
 				</section>
 
 				<section id="main" class="wrapper">
-					<div class="inner">
+					<div class="inner" style="margin:0 auto;">
 						<h1 class="major" align="center"><font size="6">General Information</font></h1>
 						<!-- <form method="post" action="#"> -->
 							<div class="row gtr-uniform">
@@ -101,10 +108,10 @@
 									<input type="tel" style="height: 2.75em" name="phone" id="phone" value="" placeholder= "<?php echo (($row['phone'] == '') ? 'Phone Number' : 'Other'); ?>" >
 								</div>
 							</div>
-						<h1  align="center">
+						<!-- <h1  align="center">
 							<font size="3" style="color:rgba(255, 255, 255, 0.45); font-weight:normal" >Background Color</font>
 							<input type="color" name="color" id="color" value="#5e42a6">
-						</h1>
+						</h1> -->
 						
 						<!-- </form> -->
 					</div>
