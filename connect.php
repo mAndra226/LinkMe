@@ -64,8 +64,10 @@
 		$Userid = $row['username'];
 		
 		$stmt->close();
-		$conn->close();		
-		header("Location: result.html?ID=$Userid");
+		$conn->close();	
+		session_start();
+		$_SESSION['uid'] = $Userid;		
+		header("Location: editprofile.html?ID=$Userid");
 		exit();
 		
 		}
