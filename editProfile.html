@@ -1,3 +1,35 @@
+<?php
+	session_start();
+	$dbServername = "localhost";
+	$dbUsername = "root";
+	$dbPassword = "";
+	$dbName = "linkme_database";
+	$conn = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+	if(mysqli_connect_error()){
+		die('Connection Failed: '.mysqli_connect_error());
+	}else{
+		if(isset($_GET["ID"])){
+			if(!($_SESSION['uid'] == $_GET['ID'])){
+				header('Location: index.html');
+				exit();
+			}
+			$ID = mysqli_real_escape_string($conn, $_GET['ID']);
+			$sql = "SELECT * FROM userprofile WHERE username = '$ID' ";
+			$result = mysqli_query($conn, $sql) or die("Bad Query: $sql");
+			$row = mysqli_fetch_array($result);
+			if(mysqli_num_rows($result) == 0){
+				header('Location: index.html');
+				exit();
+			
+			}
+		} else {
+			header('Location: index.html');
+			exit();
+			}
+			}
+?>
+
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -15,35 +47,42 @@
 				<ul>
 					<!-- <li><a href="index.html">Home</a></li> -->
 					<!-- <li><a href="generic.html">Generic</a></li> -->
-					<li><a href="#"  class="active">Log out</a></li>
+					<li><a href="logout.php"  class="active">Log out</a></li>
 				</ul>
 			</nav>
 		</header>
 
 		<!-- Wrapper -->
-		<form id="form" method="post" action="#">
+		<form action="editprofile.php" method="post" enctype="multipart/form-data">
 			<div id="wrapper">
 				<section id="main" class="wrapper">
-					<div class="inner">
-						<h1 class="major" align="center"><font size="8">Edit you Profile</font></h1>
-						<div style="width:320px; margin:0 auto;">
-							<img style="width:300px" src="/assets/images/signup.JPG">
-							<label for="profilepic">Add your profile picture</label>
-							<input class="upload" type="file" id="profilepic" onchange="setFiles(this)">
-						</div>
+					<h1 class="major" align="center"><font size="8">Edit you Profile</font></h1>
+					<div style="width:320px; margin:0 auto;">
+						<img style="width:300px; height: 300px" id="profilepic" src="/assets/images/signup.JPG"/>
+						<script>
+							var loadFile = function(event) {
+								var profilepic = document.getElementById('profilepic');
+								profilepic.src = URL.createObjectURL(event.target.files[0]);
+								profilepic.onload = function() {
+									URL.revokeObjectURL(profilepic.src)
+								}
+							};
+						</script>
+						<label for="profilepic">Add your profile picture</label>
+						<input type="file" name="file" accept="image/*" onchange="loadFile(event)">
 					</div>
 				</section>
 
 				<section id="main" class="wrapper">
-					<div class="inner">
+					<div class="inner" style="margin:0 auto;">
 						<h1 class="major" align="center"><font size="6">General Information</font></h1>
 						<!-- <form method="post" action="#"> -->
 							<div class="row gtr-uniform">
 								<div class="col-6 col-12-xsmall">
-									<input type="text" name="name" id="name" value="" placeholder="Name" required pattern="[a-zA-Z\s]+">
+									<input type="text" name="name" id="name" value="" placeholder=<?php echo $row['realname'] ?> required pattern="[a-zA-Z\s]+">
 								</div>
 								<div class="col-6 col-12-xsmall">
-									<input type="email" name="email" id="email" value="" placeholder="Email" required>
+									<input type="email" name="email" id="email" value="" placeholder=<?php echo $row['email'] ?> required>
 								</div>
 								<div class="col-6 col-12-xsmall">
 									<!-- <select name="demo-category" id="demo-category">
@@ -54,16 +93,16 @@
 										<option value="white">white</option>
 									</select> -->
 									<!-- <input type="color" style="height: 2.75em" name="phone" id="phone" value="#A0A0A0" placeholder="Phone number"> -->
-									<input type="text" name="address" id="address" value="" placeholder="City, State, Country">
+									<input type="text" name="address" id="address" value="" placeholder="<?php echo (($row['country'] == '') ? 'City, State, Country' : $row['country']); ?>">
 								</div>
 								<div class="col-6 col-12-xsmall">
-									<input type="tel" style="height: 2.75em" name="phone" id="phone" value="" placeholder="Phone number">
+									<input type="tel" style="height: 2.75em" name="phone" id="phone" value="" placeholder= "<?php echo (($row['phone'] == '') ? 'Phone Number' : $row['phone']); ?>" >
 								</div>
 							</div>
-						<h1  align="center">
+						<!-- <h1  align="center">
 							<font size="3" style="color:rgba(255, 255, 255, 0.45); font-weight:normal" >Background Color</font>
 							<input type="color" name="color" id="color" value="#5e42a6">
-						</h1>
+						</h1> -->
 						
 						<!-- </form> -->
 					</div>
@@ -122,11 +161,11 @@
 						<!-- <form method="post" action="#"> -->
 							<div class="row gtr-uniform">
 								<div class="col-12">
-									<textarea name="demo-message" id="demo-message" placeholder="Add something about you here..." rows="6"></textarea>
+									<textarea name="bio" id="bio" placeholder="<?php echo (($row['bio'] == '') ? 'Add something about you here...' : $row['bio']); ?>" rows="6"></textarea>
 								</div>
 								<div class="col-12">
 									<!-- <ul class="actions"> -->
-										<button type="submit" value="Save" class="primary"><a href="#">Save</a></button>
+										<button type="submit" value="Save" class="primary"><a >Save</a></button>
 										<button type="reset" value="Reset">Reset</button>
 									<!-- </ul> -->
 								</div>

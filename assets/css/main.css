@@ -30,8 +30,6 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
-	margin: 0 auto;
-	padding: 0;
 }
 
 ol, ul {
@@ -71,21 +69,6 @@ input, select, textarea {
 	-webkit-appearance: none;
 	-ms-appearance: none;
 	appearance: none;
-}
-
-#form {
-	position: absolute;
-	margin: 0 auto;
-}
-
-.wrapper {
-	width: auto;
-	margin-left: 20em;
-}
-
-.inner {
-	margin-left: 10px;
-	margin-top: -50px;
 }
 
 img {
@@ -2707,7 +2690,6 @@ img {
 
 		ul.actions li a {
 			top: 10px;
-			left: -11em;
 		}
 
 		ul.actions.special {

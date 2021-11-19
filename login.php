@@ -26,6 +26,8 @@
 				$result = mysqli_query($conn, $sql) or die("Bad Query: $sql");
 				$row = mysqli_fetch_array($result);
 				$Userid = $row['username'];
+				session_start();
+				$_SESSION['uid'] = $Userid;
 				echo "<h2>Login Successfully</h2>";
 				header("Location: result.html?ID=$Userid");
 				exit();
