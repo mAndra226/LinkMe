@@ -57,15 +57,22 @@ if(mysqli_connect_error()){
 			}
 		//}
 		
+		//links
 		
-		
-		
+		$UPDATE = "UPDATE links SET Facebook = ?, Twitter = ?, Instagram = ?, Linkedin = ?, Github = ?, Youtube = ?, Snapchat = ?, Reddit = ?, Pinterest = ? 
+		WHERE Userid = ?";
+		$stmt = $conn->prepare($UPDATE);
+		$stmt->bind_param('ssssssssss', $facebook, $twitter, $instagram, $linkedin, $github, $youtube, $snapchat, $reddit, $pinterest, $_SESSION['uid']);
+		$stmt->execute();
+		$stmt->close();
+	
 		//add basic info
 		$UPDATE = "UPDATE userprofile SET realname = ?, email = ?, country = ?, phone = ?, bio = ?, image = ?
 		WHERE username = ?";
 		$stmt = $conn->prepare($UPDATE);
 		$stmt->bind_param('sssssss', $realname, $email, $address, $phone, $bio, $fileDestination, $_SESSION['uid']);
 		$stmt->execute();
+		$stmt->close();
 		header("Location: result.html?ID=$ID");
 		exit();		
 }
