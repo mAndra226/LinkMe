@@ -17,6 +17,10 @@
 			$sql = "SELECT * FROM userprofile WHERE username = '$ID' ";
 			$result = mysqli_query($conn, $sql) or die("Bad Query: $sql");
 			$row = mysqli_fetch_array($result);
+			
+			$sql = "SELECT * FROM links WHERE Userid = '$ID' ";
+			$result2 = mysqli_query($conn, $sql) or die("Bad Query: $sql");
+			$row2 = mysqli_fetch_array($result2);
 			if(mysqli_num_rows($result) == 0){
 				header('Location: index.html');
 				exit();
@@ -79,10 +83,10 @@
 						<!-- <form method="post" action="#"> -->
 							<div class="row gtr-uniform">
 								<div class="col-6 col-12-xsmall">
-									<input type="text" name="name" id="name" value="" placeholder=<?php echo $row['realname'] ?> required pattern="[a-zA-Z\s]+">
+									<input type="text" name="name" id="name" value=<?php echo $row['realname'] ?> placeholder=<?php echo $row['realname'] ?> required pattern="[a-zA-Z\s]+">
 								</div>
 								<div class="col-6 col-12-xsmall">
-									<input type="email" name="email" id="email" value="" placeholder=<?php echo $row['email'] ?> required>
+									<input type="email" name="email" id="email" value=<?php echo $row['email'] ?> placeholder=<?php echo $row['email'] ?> required>
 								</div>
 								<div class="col-6 col-12-xsmall">
 									<!-- <select name="demo-category" id="demo-category">
@@ -93,10 +97,10 @@
 										<option value="white">white</option>
 									</select> -->
 									<!-- <input type="color" style="height: 2.75em" name="phone" id="phone" value="#A0A0A0" placeholder="Phone number"> -->
-									<input type="text" name="address" id="address" value="" placeholder="<?php echo (($row['country'] == '') ? 'City, State, Country' : $row['country']); ?>">
+									<input type="text" name="address" id="address" value="<?php echo (($row['country'] == '') ? '' : $row['country']); ?>" placeholder="City, State, Country">
 								</div>
 								<div class="col-6 col-12-xsmall">
-									<input type="tel" style="height: 2.75em" name="phone" id="phone" value="" placeholder= "<?php echo (($row['phone'] == '') ? 'Phone Number' : $row['phone']); ?>" >
+									<input type="tel" style="height: 2.75em" name="phone" id="phone" value="<?php echo (($row['phone'] == '') ? '' : $row['phone']); ?>" placeholder= "Phone Number" >
 								</div>
 							</div>
 						<!-- <h1  align="center">
@@ -115,39 +119,39 @@
 						<div style="width:320px; margin:0 auto;">
 							<ul class="actions">
 								<li><a class="icon brands fa-facebook"><span class="label"></span></a></li>
-								<li><input type="text" style="width: 16.75em" name="facebook" id="facebook" value="" placeholder="Facebook URL"></li>
+								<li><input type="text" style="width: 16.75em" name="facebook" id="facebook" value="<?php echo (($row2['Facebook'] == '') ? '' : $row2['Facebook']); ?>" placeholder="Facebook URL"></li>
 							</ul>
 							<ul class="actions">
 								<li><a class="icon brands fa-twitter"><span class="label"></span></a></li>
-								<li><input type="text" style="width: 16.75em" name="twitter" id="twitter" value="" placeholder="Twitter URL"></li>
+								<li><input type="text" style="width: 16.75em" name="twitter" id="twitter" value="<?php echo (($row2['Twitter'] == '') ? '' : $row2['Twitter']); ?>" placeholder="Twitter URL"></li>
 							</ul>
 							<ul class="actions">
 								<li><a class="icon brands fa-instagram"><span class="label"></span></a></li>
-								<li><input type="text" style="width: 16.75em" name="instagram" id="instagram" value="" placeholder="Instagram URL"></li>
+								<li><input type="text" style="width: 16.75em" name="instagram" id="instagram" value="<?php echo (($row2['Instagram'] == '') ? '' : $row2['Instagram']); ?>" placeholder="Instagram URL"></li>
 							</ul>
 							<ul class="actions">
 								<li><a class="icon brands fa-linkedin"><span class="label"></span></a></li>
-								<li><input type="text" style="width: 16.75em" name="linkedin" id="linkedin" value="" placeholder="LinkedIn URL"></li>
+								<li><input type="text" style="width: 16.75em" name="linkedin" id="linkedin" value="<?php echo (($row2['Linkedin'] == '') ? '' : $row2['Linkedin']); ?>" placeholder="LinkedIn URL"></li>
 							</ul>
 							<ul class="actions">
 								<li><a class="icon brands fa-github"><span class="label"></span></a></li>
-								<li><input type="text" style="width: 16.75em" name="github" id="github" value="" placeholder="GitHub URL"></li>
+								<li><input type="text" style="width: 16.75em" name="github" id="github" value="<?php echo (($row2['Github'] == '') ? '' : $row2['Github']); ?>" placeholder="GitHub URL"></li>
 							</ul>
 							<ul class="actions">
 								<li><a class="icon brands fa-youtube"><span class="label"></span></a></li>
-								<li><input type="text" style="width: 16.75em" name="youtube" id="youtube" value="" placeholder="Youtube URL"></li>
+								<li><input type="text" style="width: 16.75em" name="youtube" id="youtube" value="<?php echo (($row2['Youtube'] == '') ? '' : $row2['Youtube']); ?>" placeholder="Youtube URL"></li>
 							</ul>
 							<ul class="actions">
 								<li><a class="icon brands fa-snapchat"><span class="label"></span></a></li>
-								<li><input type="text" style="width: 16.75em" name="snapchat" id="snapchat" value="" placeholder="Snapchat URL"></li>
+								<li><input type="text" style="width: 16.75em" name="snapchat" id="snapchat" value="<?php echo (($row2['Snapchat'] == '') ? '' : $row2['Snapchat']); ?>" placeholder="Snapchat URL"></li>
 							</ul>
 							<ul class="actions">
 								<li><a class="icon brands fa-reddit"><span class="label"></span></a></li>
-								<li><input type="text" style="width: 16.75em" name="reddit" id="reddit" value="" placeholder="Reddit URL"></li>
+								<li><input type="text" style="width: 16.75em" name="reddit" id="reddit" value="<?php echo (($row2['Reddit'] == '') ? '' : $row2['Reddit']); ?>" placeholder="Reddit URL"></li>
 							</ul>
 							<ul class="actions">
 								<li><a class="icon brands fa-pinterest"><span class="label"></span></a></li>
-								<li><input type="text" style="width: 16.75em" name="pinterest" id="pinterest" value="" placeholder="Pinterest URL"></li>
+								<li><input type="text" style="width: 16.75em" name="pinterest" id="pinterest" value="<?php echo (($row2['Pinterest'] == '') ? '' : $row2['Pinterest']); ?>" placeholder="Pinterest URL"></li>
 							</ul>
 						</div>
 						
