@@ -13,6 +13,11 @@
 			$sql = "SELECT * FROM userprofile WHERE username = '$ID' ";
 			$result = mysqli_query($conn, $sql) or die("Bad Query: $sql");
 			$row = mysqli_fetch_array($result);
+			
+			
+			$sql = "SELECT * FROM links WHERE Userid = '$ID' ";
+			$result2 = mysqli_query($conn, $sql) or die("Bad Query: $sql");
+			$row2 = mysqli_fetch_array($result2);
 			//$image = $row['image'];
 			//$imagesql = "SELECT image FROM userprofile WHERE username = '$ID' ";
 			//$fileDestination = mysqli_query($conn, $imagesql) or die("Bad Query: $imagesql");
@@ -76,23 +81,76 @@
 		<div id="wrapper">
 			<div class="containerBkg">
 				<!-- Users profile picture-->
-				<?php 
-				$image = strval($row['image']);
-				echo "<img src = '$image' >";?>
+				<?php
+					if($row['image']==NULL)
+					{
+						echo "<img src = assets/images/pic3.jpg >";
+						
+					}else{
+						$image = strval($row['image']);
+						echo "<img src = '$image' >";
+						}
+				?>
 				<div class="usersName">
 					<p><?php echo $row['realname'] ?></p>
 				</div>
 				<!--Social Media Links-->
 				<div class="socialContainer">
-					<button class="socialLinks0"></button>
-					<button class="socialLinks1"></button>
-					<button class="socialLinks2"></button>
-					<button class="socialLinks3"></button>
-					<button class="socialLinks4"></button>
-					<button class="socialLinks1"></button>
-					<button class="socialLinks2"></button>
-					<button class="socialLinks3"></button>
-					<button class="socialLinks4"></button>
+					<?php
+						if(!($row2['Facebook'] == NULL)){
+					$facebook = $row2['Facebook'];
+					echo "<a href='https://$facebook' class='socialLinks0'></a>";
+						}
+					?>
+					<?php
+						if(!($row2['Twitter'] == NULL)){
+					$twitter = $row2['Twitter'];
+					echo "<a href='https://$twitter' class='socialLinks1'></a>";
+						}
+					?>
+					<?php
+						if(!($row2['Instagram'] == NULL)){
+					$instagram = $row2['Instagram'];
+					echo "<a href='https://$instagram' class='socialLinks2'></a>";
+						}
+					?>
+					<?php
+						if(!($row2['Linkedin'] == NULL)){
+					$linkedin = $row2['Linkedin'];
+					echo "<a href='https://$linkedin' class='socialLinks3'></a>";
+						}
+					?>
+					<?php
+						if(!($row2['Github'] == NULL)){
+					$github = $row2['Github'];
+					echo "<a href='https://$github' class='socialLinks4'></a>";
+						}
+					?>
+					<?php
+						if(!($row2['Youtube'] == NULL)){
+					$youtube = $row2['Youtube'];
+					echo "<a href='https://$youtube' class='socialLinks1'></a>";
+						}
+					?>
+					<?php
+						if(!($row2['Snapchat'] == NULL)){
+					$snapchat = $row2['Snapchat'];
+					echo "<a href='https://$snapchat' class='socialLinks2'></a>";
+						}
+					?>
+					<?php
+						if(!($row2['Reddit'] == NULL)){
+					$reddit = $row2['Reddit'];
+					echo "<a href='https://$reddit' class='socialLinks3'></a>";
+						}
+					?>
+					<?php
+						if(!($row2['Pinterest'] == NULL)){
+					$pinterest = $row2['Pinterest'];
+					echo "<a href='https://$pinterest' class='socialLinks4'></a>";
+						}
+					?>
+
 				</div>
 				<!--Bio-->
 				<div class="bioBackround">
