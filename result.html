@@ -18,9 +18,6 @@
 			$sql = "SELECT * FROM links WHERE Userid = '$ID' ";
 			$result2 = mysqli_query($conn, $sql) or die("Bad Query: $sql");
 			$row2 = mysqli_fetch_array($result2);
-			//$image = $row['image'];
-			//$imagesql = "SELECT image FROM userprofile WHERE username = '$ID' ";
-			//$fileDestination = mysqli_query($conn, $imagesql) or die("Bad Query: $imagesql");
 			if(mysqli_num_rows($result) == 0){
 				header('Location: index.html');
 				exit();
@@ -32,139 +29,134 @@
 			}
 			}
 ?>
-
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>LinkMe</title>
+		<title>LinkMe | User Page</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/result.css" />
-		<link rel="stylesheet" href="assets/css/resultResp.css">
+		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
-		<!-- Navbar -->
-		<section id="navbar">
-			<div class="inner">
-				<a href="index.html" class="linkme">LinkMe</a>
-				<nav>
-					<ul>
-						<?php
+		<header id="header">
+			<a href="index.html" class="title">LinkMe</a>
+			<nav>
+				<ul>
+					<?php
 						if (isset($_SESSION["uid"])){
 							if($_SESSION["uid"] == $ID){
 								$Userid = $row['username'];
-								echo "<li><a href='editprofile.html?ID=$Userid'>Edit</a></li>";
+								echo "<li><a href='editprofile.html?ID=$Userid'class='active'>Edit</a></li>";
 							}
 						}
 						?>
-						<li><a href="#one">About</a></li>
-						<?php
+					<li><a href="#one"class="active">About</a></li>
+					<?php
 						if (isset($_SESSION["uid"])){
 							if($_SESSION["uid"] == $ID){
 								$Userid = $row['username'];
-								echo "<li><a href='logout.php'>Log Out</a></li>";
+								echo "<li><a href='logout.php'class='active'>Log Out</a></li>";
 							}
 						}
-						?>
-						<?php
+					?>
+					<?php
 						if (!(isset($_SESSION["uid"]))){
-								echo "<li><a href='login.html'>Login</a></li>";						
+							echo "<li><a href='login.html'class='active'>Login</a></li>";						
 						}
-						?>
-					</ul>
-				</nav>
-			</div>
-		</section>
+					?>
+				</ul>
+			</nav>
+		</header>
 
-		<!-- Wrapper -->
 		<div id="wrapper">
-			<div class="containerBkg">
-				<!-- Users profile picture-->
-				<?php
-					if($row['image']==NULL)
-					{
-						echo "<img src = assets/images/pic3.jpg >";
-						
-					}else{
-						$image = strval($row['image']);
-						echo "<img src = '$image' >";
-						}
-				?>
-				<div class="usersName">
-					<p><?php echo $row['realname'] ?></p>
-				</div>
-				<!--Social Media Links-->
-				<div class="socialContainer">
-					<?php
-						if(!($row2['Facebook'] == NULL)){
-					$facebook = $row2['Facebook'];
-					echo "<a href='https://$facebook' class='socialLinks0'></a>";
-						}
-					?>
-					<?php
-						if(!($row2['Twitter'] == NULL)){
-					$twitter = $row2['Twitter'];
-					echo "<a href='https://$twitter' class='socialLinks1'></a>";
-						}
-					?>
-					<?php
-						if(!($row2['Instagram'] == NULL)){
-					$instagram = $row2['Instagram'];
-					echo "<a href='https://$instagram' class='socialLinks2'></a>";
-						}
-					?>
-					<?php
-						if(!($row2['Linkedin'] == NULL)){
-					$linkedin = $row2['Linkedin'];
-					echo "<a href='https://$linkedin' class='socialLinks3'></a>";
-						}
-					?>
-					<?php
-						if(!($row2['Github'] == NULL)){
-					$github = $row2['Github'];
-					echo "<a href='https://$github' class='socialLinks4'></a>";
-						}
-					?>
-					<?php
-						if(!($row2['Youtube'] == NULL)){
-					$youtube = $row2['Youtube'];
-					echo "<a href='https://$youtube' class='socialLinks1'></a>";
-						}
-					?>
-					<?php
-						if(!($row2['Snapchat'] == NULL)){
-					$snapchat = $row2['Snapchat'];
-					echo "<a href='https://$snapchat' class='socialLinks2'></a>";
-						}
-					?>
-					<?php
-						if(!($row2['Reddit'] == NULL)){
-					$reddit = $row2['Reddit'];
-					echo "<a href='https://$reddit' class='socialLinks3'></a>";
-						}
-					?>
-					<?php
-						if(!($row2['Pinterest'] == NULL)){
-					$pinterest = $row2['Pinterest'];
-					echo "<a href='https://$pinterest' class='socialLinks4'></a>";
-						}
-					?>
 
-				</div>
-				<!--Bio-->
-				<div class="bioBackround">
-					<p>
-						<?php echo $row['bio'] ?>
-					</p>
-				</div>
+			<!-- Main -->
+				<section id="main" class="wrapper">
+					<div class="inner">
+						<span class="image fit">
+						<?php
+							if($row['image']==NULL)
+							{
+								echo "<img src='assets/images/pic3.jpg' style='width: 300px; height: 300px; border-radius: 50%;'>";
+								
+							}else{
+								$image = strval($row['image']);
+								echo "<img src = '$image' style='width: 300px; height: 300px; border-radius: 50%;'>";
+							}
+						?>
+						</span>
+						<h1 class="major" style="text-align: center; margin: 0 0 0.5em 0;"><?php echo $row['realname']; ?></h1>
+						<ul class="actions" style="margin-left: -0.5rem;">
+							<li style="font-size: 2.5rem; cursor: pointer;">
+								<?php
+									if(!($row['email'] == NULL)){
+										$email = $row['email'];
+										echo "<a href='mailto:$email' class='icon solid fa-envelope' style='margin-left: 12px; margin-right:12px;><span class='label'></span></a>";
+									}
+								?>
+								<?php
+									if(!($row2['Facebook'] == NULL)){
+										$facebook = $row2['Facebook'];
+										echo "<a href='https://$facebook' class='icon brands fa-facebook' style='margin-left: 12px; margin-right:12px;'target='_blank'><span class='label'></span></a>";
+									}
+								?>
+								<?php
+									if(!($row2['Twitter'] == NULL)){
+										$twitter = $row2['Twitter'];
+										echo "<a href='https://$twitter' class='icon brands fa-twitter' style='margin-left: 12px; margin-right:12px;'target='_blank'><span class='label'></span></a>";
+									}
+								?>
+								<?php
+									if(!($row2['Instagram'] == NULL)){
+										$instagram = $row2['Instagram'];
+										echo "<a href='https://$instagram' class='icon brands fa-instagram' style='margin-left: 12px; margin-right:12px;'target='_blank'><span class='label'></span></a>";
+									}
+								?>
+								<?php
+									if(!($row2['Linkedin'] == NULL)){
+										$linkedin = $row2['Linkedin'];
+										echo "<a href='https://$linkedin' class='icon brands fa-linkedin' style='margin-left: 12px; margin-right:12px;'target='_blank'><span class='label'></span></a>";
+									}
+								?>
+								<?php
+									if(!($row2['Github'] == NULL)){
+										$github = $row2['Github'];
+										echo "<a href='https://$github' class='icon brands fa-github' style='margin-left: 12px; margin-right:12px;'target='_blank'><span class='label'></span></a>";
+									}
+								?>
+								<?php
+									if(!($row2['Youtube'] == NULL)){
+										$youtube = $row2['Youtube'];
+										echo "<a href='https://$youtube' class='icon brands fa-youtube' style='margin-left: 12px; margin-right:12px;'target='_blank'><span class='label'></span></a>";
+									}
+								?>
+								<?php
+									if(!($row2['Snapchat'] == NULL)){
+										$snapchat = $row2['Snapchat'];
+										echo "<a href='https://$snapchat' class='icon brands fa-snapchat' style='margin-left: 12px; margin-right:12px;'target='_blank'><span class='label'></span></a>";
+									}
+								?>
+								<?php
+									if(!($row2['Reddit'] == NULL)){
+										$reddit = $row2['Reddit'];
+										echo "<a href='https://$reddit' class='icon brands fa-reddit' style='margin-left: 12px; margin-right:12px;'target='_blank'><span class='label'></span></a>";
+									}
+								?>
+								<?php
+									if(!($row2['Pinterest'] == NULL)){
+										$pinterest = $row2['Pinterest'];
+										echo "<a href='https://$pinterest' class='icon brands fa-pinterest' style='margin-left: 12px; margin-right:12px;'target='_blank'><span class='label'></span></a>";
+									}
+								?>
+							</li>
+						</ul>
+						<p style="text-align: center; color: white"><?php echo $row['bio'] ?></p>
+					</div>
+				</section>
 
-				<!--Share button-->
-				<button>Share Your Profile!</button>
-			</div>
 		</div>
-
-		<!-- Scripts -->
+		
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/jquery.scrollex.min.js"></script>
 		<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -172,6 +164,5 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
-
 	</body>
 </html>
