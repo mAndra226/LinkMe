@@ -33,12 +33,12 @@
 				exit();
 			}else{
 				echo "<h2>Invalid email or password</h2>";
-				header('Location: login.html?error=incorrectpw');
+				header('Location: login.html?error=incorrectemailpw');
 				exit();
 			}
 		}else{
 			echo "<h2>Invalid email or password</h2>";
-			header('Location: login.html?error=incorrectemail');
+			header('Location: login.html?error=incorrectemailpw');
 			exit();
 		}
 		$stmt->close();
