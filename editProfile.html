@@ -62,7 +62,11 @@
 				<section id="main" class="wrapper">
 					<h1 class="major" align="center"><font size="8">Edit you Profile</font></h1>
 					<div style="width:320px; margin:0 auto;">
-						<img style="width:300px; height: 300px" id="profilepic" src="/assets/images/signup.JPG"/>
+						
+						<?php 
+						$image = strval($row['image']);
+						echo "<img style='width:300px; height: 300px' id='profilepic' src='$image'/> ";
+						?>
 						<script>
 							var loadFile = function(event) {
 								var profilepic = document.getElementById('profilepic');
