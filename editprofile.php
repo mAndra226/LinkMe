@@ -58,6 +58,15 @@ if(mysqli_connect_error()){
 		//}
 		
 		//links
+		$facebook = preg_replace("(^https?://)", "", $facebook );
+		$twitter = preg_replace("(^https?://)", "", $twitter );
+		$instagram = preg_replace("(^https?://)", "", $instagram );
+		$linkedin = preg_replace("(^https?://)", "", $linkedin );
+		$github = preg_replace("(^https?://)", "", $github );
+		$youtube = preg_replace("(^https?://)", "", $youtube );
+		$snapchat = preg_replace("(^https?://)", "", $snapchat );
+		$reddit = preg_replace("(^https?://)", "", $reddit );
+		$pinterest = preg_replace("(^https?://)", "", $pinterest );
 		
 		$UPDATE = "UPDATE links SET Facebook = ?, Twitter = ?, Instagram = ?, Linkedin = ?, Github = ?, Youtube = ?, Snapchat = ?, Reddit = ?, Pinterest = ? 
 		WHERE Userid = ?";
@@ -66,11 +75,21 @@ if(mysqli_connect_error()){
 		$stmt->execute();
 		$stmt->close();
 	
-		//add basic info
-		$UPDATE = "UPDATE userprofile SET realname = ?, email = ?, country = ?, phone = ?, bio = ?, image = ?
+	
+		//profile pic
+		if (!($fileDestination == NULL)){
+		$UPDATE = "UPDATE userprofile SET image = ?
 		WHERE username = ?";
 		$stmt = $conn->prepare($UPDATE);
-		$stmt->bind_param('sssssss', $realname, $email, $address, $phone, $bio, $fileDestination, $_SESSION['uid']);
+		$stmt->bind_param('ss', $fileDestination, $_SESSION['uid']);
+		$stmt->execute();
+		$stmt->close();
+		}
+		//add basic info
+		$UPDATE = "UPDATE userprofile SET realname = ?, email = ?, country = ?, phone = ?, bio = ?
+		WHERE username = ?";
+		$stmt = $conn->prepare($UPDATE);
+		$stmt->bind_param('ssssss', $realname, $email, $address, $phone, $bio, $_SESSION['uid']);
 		$stmt->execute();
 		$stmt->close();
 		header("Location: result.html?ID=$ID");
