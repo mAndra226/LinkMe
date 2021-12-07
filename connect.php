@@ -55,6 +55,14 @@
 		$stmt = $conn->prepare($INSERT);
 		$stmt->bind_param("ssss", $realname, $email, $hashedpw, $username);
 		$stmt->execute();
+		
+		$INSERT = "INSERT INTO links (Userid) 
+			values(?)";
+		$stmt = $conn->prepare($INSERT);
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+		
+		
 		echo "registration successfully...";
 		
 		$ID = mysqli_real_escape_string($conn, $email);
@@ -63,8 +71,9 @@
 		$row = mysqli_fetch_array($result);
 		$Userid = $row['username'];
 		
-		$stmt->close();
-		$conn->close();	
+		$stmt->close();		
+		$conn->close();
+		
 		session_start();
 		$_SESSION['uid'] = $Userid;		
 		header("Location: editprofile.html?ID=$Userid");
